@@ -37,7 +37,7 @@ const SpotifyAuthButton = ({ clientId, redirectUri, scopes, onAccessTokenReceive
       } catch (err) {
         // Ignore cross-origin errors until redirect_uri matches
       }
-    }, 1000);
+    }, 500);
   };
 
   return <button onClick={handleLogin}>Log in with Spotify</button>;
