@@ -1,6 +1,6 @@
 //import React from "react";
 
-const SpotifyAuthButton = ({ clientId, redirectUri, scopes, onAccessTokenReceived }) => {
+const SpotifyAuthButton = ({ clientId, redirectUri, scopes, onAccessTokenReceived}) => {
   const handleLogin = () => {
     const authUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&redirect_uri=${encodeURIComponent(
       redirectUri
@@ -8,7 +8,7 @@ const SpotifyAuthButton = ({ clientId, redirectUri, scopes, onAccessTokenReceive
 
     const width = 500;
     const height = 600;
-    const left = window.screen.width / 2 - width / 2;
+    const left = window.innerWidth / 2 - width / 2;
     const top = window.screen.height / 2 - height / 2;
 
     const popup = window.open(

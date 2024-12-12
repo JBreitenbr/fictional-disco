@@ -35,7 +35,6 @@ for(let i=0;i<length;i++){
 
 return (
       <div>
-        <h1>Spotify Authentication Example</h1>
         {!accessToken ? (
           <SpotifyAuthButton
             clientId= {VITE_CLIENT_ID}
