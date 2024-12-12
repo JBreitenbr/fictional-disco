@@ -1,6 +1,6 @@
 import SpotifyAuthButton from "./SpotifyAuthButton";import * as SpotifyFunctions from './spotiFunctions.js'
 import {useState,useEffect} from "react";
-const Test = () => {
+const Test = ({range,cl}) => {
   const { VITE_CLIENT_ID } = import.meta.env;
 const { VITE_REDIRECT_URI } = import.meta.env;
 const scopes = [
@@ -9,15 +9,19 @@ const scopes = [
   "user-read-recently-played",
   "user-read-private",
 ];
+  //const [cl,setCl]=useState("buttonA");
   const [accessToken, setAccessToken] = useState(null);                  const handleAccessToken = (token) => {
       setAccessToken(token);
       console.log("Received Access Token:", token);
     };
   const [favArtists, setFavArtists] = useState([]);
+ const [color,setColor]=useState("green");
+  const [amount,setAmount]=useState(60);
+  //const [cl,setCl]=useState("b2");
 useEffect(() => {
     (async function() {
         await SpotifyFunctions.setAccessToken(accessToken);
-        const artists = await SpotifyFunctions.getFavArtists();
+        const artists = await SpotifyFunctions.getFavArtists({range});
 //document.write(artists.items[0].images[2].url);
 //document.write(artists.items.length);
 let length=artists.items.length;
@@ -41,6 +45,7 @@ return (
             redirectUri={VITE_REDIRECT_URI}
             scopes={scopes}
             onAccessTokenReceived={handleAccessToken}
+            cl={cl}
           />
         ) : (
           <ol>{favArtists.map((item)=><li key={item.id}><h2>{item.name}</h2><img style={{width:"100px",height:"100px"}} src={item.image}/></li>)}</ol>

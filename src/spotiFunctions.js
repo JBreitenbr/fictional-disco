@@ -35,9 +35,9 @@ export async function getLatestSongs() {
 	}
 }
 
-export async function getFavArtists() {
+export async function getFavArtists(range) {
 	try {
-		const favArtists = await spotifyApi.getMyTopArtists({ limit: 45, time_range: "medium_term" });
+		const favArtists = await spotifyApi.getMyTopArtists({ limit: 45, time_range: range });
 		return favArtists;
 	} catch (err) {
 		console.error("Error: Attempting to get user's favorite artists", err);

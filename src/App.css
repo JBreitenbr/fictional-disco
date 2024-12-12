@@ -1,3 +1,9 @@
-button {
-  margin-left: 150px;
+.b1{
+  margin-left: 50px;
+  bacground-color: #4CAF50;
+}
+
+.b2{
+  margin-left: 250px;
+  background-color: #ff0000;
 }
