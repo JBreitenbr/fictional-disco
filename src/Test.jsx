@@ -1,6 +1,6 @@
 import SpotifyAuthButton from "./SpotifyAuthButton";import * as SpotifyFunctions from './spotiFunctions.js'
 import {useState,useEffect} from "react";
-const Test = ({range,cl}) => {
+const Test = ({cl}) => {
   const { VITE_CLIENT_ID } = import.meta.env;
 const { VITE_REDIRECT_URI } = import.meta.env;
 const scopes = [
@@ -21,7 +21,7 @@ const scopes = [
 useEffect(() => {
     (async function() {
         await SpotifyFunctions.setAccessToken(accessToken);
-        const artists = await SpotifyFunctions.getFavArtists({range});
+        const artists = await SpotifyFunctions.getFavArtists();
 //document.write(artists.items[0].images[2].url);
 //document.write(artists.items.length);
 let length=artists.items.length;
