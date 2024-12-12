@@ -1,9 +1,13 @@
+* {
+  margin:0;
+  padding:0;
+}
 .b1{
-  margin-left: 50px;
-  bacground-color: #4CAF50;
+  /*margin-left: 50px;*/
+  background-color: #4CAF50;
 }
 
 .b2{
-  margin-left: 250px;
+  /*margin-left: 200px;*/
   background-color: #ff0000;
 }
