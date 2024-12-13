@@ -46,6 +46,37 @@ export async function getFavArtists() {
 	}
 }
 
+export async function getFavArtists1() {
+	try {
+		const favArtists = await spotifyApi.getMyTopArtists({ limit: 45, time_range: "short_term" });
+		return favArtists;
+	} catch (err) {
+		console.error("Error: Attempting to get user's favorite artists", err);
+		console.error(err.stack);
+		return [{ id: null, playlistName: "Can't Download your Fav Artists!" }];
+	}
+}
+export async function getFavArtists2() {
+	try {
+		const favArtists = await spotifyApi.getMyTopArtists({ limit: 45, time_range: "medium_term" });
+		return favArtists;
+	} catch (err) {
+		console.error("Error: Attempting to get user's favorite artists", err);
+		console.error(err.stack);
+		return [{ id: null, playlistName: "Can't Download your Fav Artists!" }];
+	}
+}
+
+export async function getFavArtists3() {
+	try {
+		const favArtists = await spotifyApi.getMyTopArtists({ limit: 45, time_range: "long_term" });
+		return favArtists;
+	} catch (err) {
+		console.error("Error: Attempting to get user's favorite artists", err);
+		console.error(err.stack);
+		return [{ id: null, playlistName: "Can't Download your Fav Artists!" }];
+	}
+}
 export async function getRelatedArtists(id) {
 	try {
 		const similarArtists = await spotifyApi.getArtistRelatedArtists(id);
