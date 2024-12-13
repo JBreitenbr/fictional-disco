@@ -53,7 +53,7 @@ return (
             scopes={scopes}
             onAccessTokenReceived={handleAccessToken}
             taekscht={taekscht}
-          /><ol>{favArtists.map((item)=><li key={item.id}><h2>{item.name}</h2><img style={{width:"100px",height:"100px"}} src={item.image}/></li>)}</ol></div>
+          /><ol style={{width:"100vw",height:"100vh",display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center"}}>{favArtists.map((item)=><li key={item.id}><h2>{item.name}</h2><img style={{width:"100px",height:"100px"}} src={item.image}/></li>)}</ol></div>
 )}</div>)
 }
 export default Test;
