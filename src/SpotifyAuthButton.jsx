@@ -1,6 +1,6 @@
 //import React from "react";
 import './App.css';
-const SpotifyAuthButton = ({ clientId, redirectUri, scopes, onAccessTokenReceived,cl}) => {
+const SpotifyAuthButton = ({ clientId, redirectUri, scopes, onAccessTokenReceived,taekscht}) => {
   const handleLogin = () => {
     const authUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&redirect_uri=${encodeURIComponent(
       redirectUri
@@ -40,7 +40,7 @@ const SpotifyAuthButton = ({ clientId, redirectUri, scopes, onAccessTokenReceive
     }, 500);
   };
 
-  return <button onClick={handleLogin} className={cl}>Log in with Spotify</button>;
+  return <button onClick={handleLogin} >{taekscht}</button>;
 };
 
 export default SpotifyAuthButton;
