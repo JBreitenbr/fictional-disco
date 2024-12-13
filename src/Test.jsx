@@ -37,23 +37,14 @@ for(let i=0;i<length;i++){
   }, [accessToken])
 
 return (
-      <div>
-        {!accessToken ? (
-          <SpotifyAuthButton
+      <div><SpotifyAuthButton
             clientId= {VITE_CLIENT_ID}
             redirectUri={VITE_REDIRECT_URI}
             scopes={scopes}
             onAccessTokenReceived={handleAccessToken}
             taekscht={taekscht}
           />
-        ) : (
-        <div style={{backgroundColor:"papayawhip"}}><SpotifyAuthButton
-            clientId= {VITE_CLIENT_ID}
-            redirectUri={VITE_REDIRECT_URI}
-            scopes={scopes}
-            onAccessTokenReceived={handleAccessToken}
-            taekscht={taekscht}
-          /><ol style={{width:"100vw"}}>{favArtists.map((item)=><li key={item.id}><h2>{item.name}</h2><img style={{width:"100px",height:"100px"}} src={item.image}/></li>)}</ol></div>
-)}</div>)
+        <div style={{backgroundColor:"papayawhip"}}><ol style={{width:"100vw"}}>{favArtists.map((item)=><li key={item.id}><h2>{item.name}</h2><img style={{width:"100px",height:"100px"}} src={item.image}/></li>)}</ol></div>
+      </div>)
 }
 export default Test;
