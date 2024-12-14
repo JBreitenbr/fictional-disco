@@ -1,6 +1,6 @@
 import SpotifyAuthButton from "./SpotifyAuthButton";import * as SpotifyFunctions from './spotiFunctions.js'
 import {useState,useEffect} from "react";
-const Test = ({taekscht,time_range}) => {
+const Test = ({taekscht,num}) => {
   const { VITE_CLIENT_ID } = import.meta.env;
 const { VITE_REDIRECT_URI } = import.meta.env;
 const scopes = [
@@ -15,15 +15,14 @@ const scopes = [
       console.log("Received Access Token:", token);
     };
   const [favArtists, setFavArtists] = useState([]);
- 
+
 useEffect(() => {
     (async function() {
         await SpotifyFunctions.setAccessToken(accessToken);
   let artists;
-  artists=await SpotifyFunctions.getFavArtists({time_range});
- /* if(num==1){artists = await SpotifyFunctions.getFavArtists1();}
+  if(num==1){artists = await SpotifyFunctions.getFavArtists1();}
   if(num==2){artists = await SpotifyFunctions.getFavArtists2();}
-  if(num==3){artists = await SpotifyFunctions.getFavArtists3();}*/
+  if(num==3){artists = await SpotifyFunctions.getFavArtists3();}
 let length=artists.items.length;
 let artArr=[];
 for(let i=0;i<length;i++){
@@ -38,23 +37,14 @@ for(let i=0;i<length;i++){
   }, [accessToken])
 
 return (
-      <div>
-        {!accessToken ? (
-          <SpotifyAuthButton
+      <div><SpotifyAuthButton
             clientId= {VITE_CLIENT_ID}
             redirectUri={VITE_REDIRECT_URI}
             scopes={scopes}
             onAccessTokenReceived={handleAccessToken}
             taekscht={taekscht}
           />
-        ) : (<div><SpotifyAuthButton
-            clientId= {VITE_CLIENT_ID}
-            redirectUri={VITE_REDIRECT_URI}
-            scopes={scopes}
-            onAccessTokenReceived={handleAccessToken}
-            taekscht={taekscht}
-          />
-          <ol>{favArtists.map((item)=><li key={item.id}><h2>{item.name}</h2><img style={{width:"100px",height:"100px"}} src={item.image}/></li>)}</ol></div>
-)}</div>)
+ {accessToken?(<div style={{backgroundColor:"purple"}}><ol style={{width:"100vw"}}>{favArtists.map((item)=><li key={item.id}><h2>{item.name}</h2><img style={{width:"100px",height:"100px"}} src={item.image}/></li>)}</ol></div>):<div>Nix</div>}
+      </div>)
 }
 export default Test;
