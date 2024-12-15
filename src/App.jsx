@@ -9,7 +9,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/fictional-disco" element={<Alternative />} />
-        <Route path="/fictional-disco/redirect" element={<Callback />} />
+  
       </Routes>
     </Router>  
   );

@@ -9,6 +9,7 @@ const scopes = [
   "user-read-recently-played",
   "user-read-private",
 ];
+  const [accessToken, setAccessToken] = useState(null);
   const handleLogin = () => {
     const authUrl = `https://accounts.spotify.com/authorize?client_id=${VITE_CLIENT_ID}&response_type=token&redirect_uri=${encodeURIComponent(
       VITE_REDIRECT_URI
@@ -49,7 +50,7 @@ const scopes = [
     }, 500);
   };
 
-  return <div><button onClick={handleLogin} >Login with Spotify</button><div> {accessToken}</div></div>;
+  return <div style={{backgroundColor:"papayawhip"}}><button onClick={handleLogin} >Login with Spotify</button><div> {accessToken}</div></div>;
 };
 
 export default Alternative;
