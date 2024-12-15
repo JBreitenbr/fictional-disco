@@ -48,7 +48,7 @@ fetch(`https://api.spotify.com/v1/me/top/tracks?time_range=medium_term&limit=10`
     },
     method:"GET",
     /*body:JSON.stringify(body)*/
-  }).then(response => response.json()).then((data)=>setTracks(data.items))}, []);           //onAccessTokenReceived(accessToken); // Pass the token to the parent component
+  }).then(response => response.json()).then((data)=>setTracks(data.items))}, [accessToken]);           //onAccessTokenReceived(accessToken); // Pass the token to the parent component
             popup.close();
             clearInterval(timer);
           }
@@ -59,7 +59,7 @@ fetch(`https://api.spotify.com/v1/me/top/tracks?time_range=medium_term&limit=10`
     }, 500);
   };
 
-  return <div style={{backgroundColor:"papayawhip"}}><button onClick={handleLogin} >Login with Spotify</button><ol> {tracks.map((track)=><li>{track.name}</li>)}</ol></div>;
+  return <div style={{backgroundColor:"lightblue"}}><button onClick={handleLogin} >Login with Spotify</button><ol> {tracks.map((track)=><li>{track.name}</li>)}</ol></div>;
 };
 
 export default Alternative;
