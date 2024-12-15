@@ -1,7 +1,7 @@
 import {useState,useEffect} from "react";
 const AllInOne = () => {
 const [accessToken, setAccessToken] = useState(null);
-const [count, setCount] = useState(0);
+
 const { VITE_CLIENT_ID } = import.meta.env;
 const { VITE_REDIRECT_URI } = import.meta.env;
 const scopes = [
@@ -26,38 +26,26 @@ const scopes = [
         "Spotify Authorization",
         `width=${width},height=${height},top=${top},left=${left}`
       );
-
-      const timer = setInterval(() => {
-        try {
-          if (popup.closed) {
-            clearInterval(timer);
-            console.log("Popup closed before authorization.");
-          }
-
-          const hash = popup.location.hash;
-          if (hash) {
-            const params = new URLSearchParams(hash.substring(1));
-            const token = params.get("access_token");
-            if (token) {
-              setAccessToken(token); // Save token in state
-              popup.close();
-              clearInterval(timer);
-            }
-          }
-        } catch (err) {
-          // Ignore cross-origin errors until redirect_uri matches
+const handleMessage = (event) => {
+        if (event.origin === window.location.origin && event.data.accessToken) {
+          setAccessToken(event.data.accessToken);
+          popup.close();
         }
-      }, 1000);
+      };
+
+      window.addEventListener("message", handleMessage);
+
+      // Cleanup event listener
+      return () => window.removeEventListener("message", handleMessage);
     };
 
-    // Call initiateAuth on window load
-    window.onload = initiateAuth;
-  }, [count]);
+    // Automatically initiate the authentication process on component load
+    initiateAuth();
+  }, []);
 
   return (
     <div>
       <h1>Spotify Authentication</h1>
-      <button onClick={() => setCount(count + 1)}>Click Me</button><p>{count}</p>
       {accessToken ? (
         <p>Access Token: {accessToken}</p>
       ) : (
