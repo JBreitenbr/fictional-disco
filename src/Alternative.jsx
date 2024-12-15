@@ -10,7 +10,7 @@ const scopes = [
   "user-read-recently-played",
   "user-read-private",
 ];
-  const [accessToken, setAccessToken] = useState(null);  const [favArtists, setFavArtists] = useState([]);
+  const [accessToken, setAccessToken] = useState(null);  const [tracks, setTracks] = useState([]);
   const handleLogin = () => {
     const authUrl = `https://accounts.spotify.com/authorize?client_id=${VITE_CLIENT_ID}&response_type=token&redirect_uri=${encodeURIComponent(
       VITE_REDIRECT_URI
@@ -41,7 +41,14 @@ const scopes = [
           if (accessToken) {
             setAccessToken(accessToken);
 //SpotifyFunctions.setAccessToken(accessToken);  
-            //onAccessTokenReceived(accessToken); // Pass the token to the parent component
+ useEffect(() =>{
+fetch(`https://api.spotify.com/v1/me/top/tracks?time_range=medium_term&limit=10`, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+    method:"GET",
+    /*body:JSON.stringify(body)*/
+  }).then(response => response.json()).then((data)=>setTracks(data.items))}, []);           //onAccessTokenReceived(accessToken); // Pass the token to the parent component
             popup.close();
             clearInterval(timer);
           }
@@ -52,7 +59,7 @@ const scopes = [
     }, 500);
   };
 
-  return <div style={{backgroundColor:"papayawhip"}}><button onClick={handleLogin} >Login with Spotify</button><div> {accessToken}</div></div>;
+  return <div style={{backgroundColor:"papayawhip"}}><button onClick={handleLogin} >Login with Spotify</button><ol> {tracks.map((track)=><li>{track.name}</li>)}</ol></div>;
 };
 
 export default Alternative;
