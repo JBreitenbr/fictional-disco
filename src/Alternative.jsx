@@ -40,6 +40,9 @@ const scopes = [
           const accessToken = params.get("access_token");
           if (accessToken) {
             setAccessToken(accessToken);
+useEffect(() => {
+    (async function() {
+        await 
 SpotifyFunctions.setAccessToken(accessToken);  
             let artists=  SpotifyFunctions.getFavArtists();
     let length=artists.items.length;
@@ -50,7 +53,8 @@ for(let i=0;i<length;i++){
   artArr[i]["id"]=artists.items[i].id;
   artArr[i]["image"]=artists.items[i].images[2].url;
 }
-    setFavArtists(artArr);   //onAccessTokenReceived(accessToken); // Pass the token to the parent component
+    setFavArtists(artArr);       })();
+  }, [accessToken])//onAccessTokenReceived(accessToken); // Pass the token to the parent component
             popup.close();
             clearInterval(timer);
           }
