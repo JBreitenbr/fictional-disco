@@ -1,7 +1,7 @@
 import './App.css'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
-import Super from "./Super";
+import Test from "./Test";
 import Redirect from "./Redirect";
 function App() {
 
