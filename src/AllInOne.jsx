@@ -1,6 +1,7 @@
 import {useState,useEffect} from "react";
 const AllInOne = () => {
 const [accessToken, setAccessToken] = useState(null);
+const [count, setCount] = useState(0);
 const { VITE_CLIENT_ID } = import.meta.env;
 const { VITE_REDIRECT_URI } = import.meta.env;
 const scopes = [
@@ -51,11 +52,12 @@ const scopes = [
 
     // Call initiateAuth on window load
     window.onload = initiateAuth;
-  }, []);
+  }, [count]);
 
   return (
     <div>
       <h1>Spotify Authentication</h1>
+      <button onClick={() => setCount(count + 1)}>Click Me</button><p>{count}</p>
       {accessToken ? (
         <p>Access Token: {accessToken}</p>
       ) : (
