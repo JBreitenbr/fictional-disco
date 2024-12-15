@@ -8,7 +8,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/fictional-disco" element={<Super />} />
+        <Route path="/fictional-disco" element={<Test />} />
         <Route path="/fictional-disco/redirect" element={<Redirect />} />
       </Routes>
     </Router>  
