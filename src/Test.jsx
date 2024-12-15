@@ -44,7 +44,7 @@ return (
             onAccessTokenReceived={handleAccessToken}
             taekscht={taekscht}
           />
- {accessToken?(<div style={{backgroundColor:"purple"}}><ol style={{width:"100vw"}}>{favArtists.map((item)=><li key={item.id}><h2>{item.name}</h2><img style={{width:"100px",height:"100px"}} src={item.image}/></li>)}</ol></div>):<div>Nix</div>}
+ {accessToken?(<div style={{backgroundColor:"purple"}}><ol style={{width:"100vw"}}>{favArtists.map((item)=><li key={item.id}><h2>{item.name}</h2><img style={{width:"100px",height:"100px"}} src={item.image}/></li>)}</ol></div>):<div></div>}
       </div>)
 }
 export default Test;
