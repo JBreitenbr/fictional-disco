@@ -40,9 +40,7 @@ const scopes = [
           const accessToken = params.get("access_token");
           if (accessToken) {
             setAccessToken(accessToken);
-useEffect(() => {
-    (async function() {
-        await 
+
 SpotifyFunctions.setAccessToken(accessToken);  
             let artists=  SpotifyFunctions.getFavArtists();
     let length=artists.items.length;
@@ -53,19 +51,18 @@ for(let i=0;i<length;i++){
   artArr[i]["id"]=artists.items[i].id;
   artArr[i]["image"]=artists.items[i].images[2].url;
 }
-    setFavArtists(artArr);       })();
-  }, [accessToken])//onAccessTokenReceived(accessToken); // Pass the token to the parent component
+    setFavArtists(artArr);       }//onAccessTokenReceived(accessToken); // Pass the token to the parent component
             popup.close();
             clearInterval(timer);
           }
-        }
+
       } catch (err) {
         // Ignore cross-origin errors until redirect_uri matches
       }
     }, 500);
   };
 
-  return <div style={{backgroundColor:"papayawhip"}}><button onClick={handleLogin} >Login with Spotify</button><div> {accessToken}</div><div style={{backgroundColor:"lightblue"}}><ol style={{width:"100vw"}}>{favArtists.map((item)=><li key={item.id}><h2>{item.name}</h2><img style={{width:"100px",height:"100px"}} src={item.image}/></li>)}</ol></div></div>;
+  return <div style={{backgroundColor:"lightblue"}}><button onClick={handleLogin} >Login with Spotify</button><div> {accessToken}</div><div style={{backgroundColor:"lightblue"}}><ol style={{width:"100vw"}}>{favArtists.map((item)=><li key={item.id}><h2>{item.name}</h2><img style={{width:"100px",height:"100px"}} src={item.image}/></li>)}</ol></div></div>;
 };
 
 export default Alternative;
