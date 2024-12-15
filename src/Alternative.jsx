@@ -1,5 +1,6 @@
 //import React from "react";
-import {useState } from "react";
+import {useState,useEffect } from "react";
+import * as SpotifyFunctions from "./spotiFunctions.js";
 import './App.css';
 const Alternative = () => {const { VITE_CLIENT_ID } = import.meta.env;
 const { VITE_REDIRECT_URI } = import.meta.env;
@@ -9,7 +10,7 @@ const scopes = [
   "user-read-recently-played",
   "user-read-private",
 ];
-  const [accessToken, setAccessToken] = useState(null);
+  const [accessToken, setAccessToken] = useState(null);  const [favArtists, setFavArtists] = useState([]);
   const handleLogin = () => {
     const authUrl = `https://accounts.spotify.com/authorize?client_id=${VITE_CLIENT_ID}&response_type=token&redirect_uri=${encodeURIComponent(
       VITE_REDIRECT_URI
@@ -39,7 +40,17 @@ const scopes = [
           const accessToken = params.get("access_token");
           if (accessToken) {
             setAccessToken(accessToken);
-            //onAccessTokenReceived(accessToken); // Pass the token to the parent component
+SpotifyFunctions.setAccessToken(accessToken);  
+            let artists=  SpotifyFunctions.getFavArtists();
+    let length=artists.items.length;
+let artArr=[];
+for(let i=0;i<length;i++){
+  artArr.push({});
+  artArr[i]["name"]=artists.items[i].name;
+  artArr[i]["id"]=artists.items[i].id;
+  artArr[i]["image"]=artists.items[i].images[2].url;
+}
+    setFavArtists(artArr);   //onAccessTokenReceived(accessToken); // Pass the token to the parent component
             popup.close();
             clearInterval(timer);
           }
@@ -50,7 +61,7 @@ const scopes = [
     }, 500);
   };
 
-  return <div style={{backgroundColor:"papayawhip"}}><button onClick={handleLogin} >Login with Spotify</button><div> {accessToken}</div></div>;
+  return <div style={{backgroundColor:"papayawhip"}}><button onClick={handleLogin} >Login with Spotify</button><div> {accessToken}</div><div style={{backgroundColor:"lightblue"}}><ol style={{width:"100vw"}}>{favArtists.map((item)=><li key={item.id}><h2>{item.name}</h2><img style={{width:"100px",height:"100px"}} src={item.image}/></li>)}</ol></div></div>;
 };
 
 export default Alternative;
