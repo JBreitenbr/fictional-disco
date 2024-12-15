@@ -1,6 +1,6 @@
 //import React from "react";
-import {useState,useEffect } from "react";
-import SpotifyFunctions from "./spotiFunctions.js";
+import {useState,useEffect,useNavigate } from "react";
+//import SpotifyFunctions from "./spotiFunctions.js";
 import './App.css';
 const Alternative = () => {const { VITE_CLIENT_ID } = import.meta.env;
 const { VITE_REDIRECT_URI } = import.meta.env;
@@ -40,15 +40,9 @@ const scopes = [
           const accessToken = params.get("access_token");
           if (accessToken) {
             setAccessToken(accessToken);
+localStorage.setItem("accessToken",accessToken);
 //SpotifyFunctions.setAccessToken(accessToken);  
- useEffect(() =>{
-fetch(`https://api.spotify.com/v1/me/top/tracks?time_range=medium_term&limit=10`, {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-    method:"GET",
-    /*body:JSON.stringify(body)*/
-  }).then(response => response.json()).then((data)=>setTracks(data.items))}, [accessToken]);           //onAccessTokenReceived(accessToken); // Pass the token to the parent component
+           //onAccessTokenReceived(accessToken); // Pass the token to the parent component
             popup.close();
             clearInterval(timer);
           }
@@ -57,9 +51,11 @@ fetch(`https://api.spotify.com/v1/me/top/tracks?time_range=medium_term&limit=10`
         // Ignore cross-origin errors until redirect_uri matches
       }
     }, 500);
+    useNavigate("/fictional-disco/top-tracks");
   };
 
-  return <div style={{backgroundColor:"lightblue"}}><button onClick={handleLogin} >Login with Spotify</button><ol> {tracks.map((track)=><li>{track.name}</li>)}</ol></div>;
+  return (<div style={{backgroundColor:"lightblue"}}><button onClick={handleLogin} >Login with Spotify</button>
+    <p>{accessToken}</p></div>)
 };
 
 export default Alternative;
