@@ -1,7 +1,10 @@
 //import React from "react";
+import {useState } from "react";
 import './App.css';
-const SpotifyAuthButton = ({ clientId, redirectUri, scopes, onAccessTokenReceived,taekscht}) => {
+const SpotifyAuthButton = ({ clientId, redirectUri, scopes, onAccessTokenReceived,taekscht,num}) => {
+  const [zahl, setZahl]=useState(0);
   const handleLogin = () => {
+    setZahl(num);
     const authUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&redirect_uri=${encodeURIComponent(
       redirectUri
     )}&scope=${encodeURIComponent(scopes.join(" "))}`;
@@ -10,7 +13,7 @@ const SpotifyAuthButton = ({ clientId, redirectUri, scopes, onAccessTokenReceive
     const height = 600;
     const left = window.innerWidth / 2 - width / 2;
     const top = window.screen.height / 2 - height / 2;
-
+    
     const popup = window.open(
       authUrl,
       "Spotify Authorization",
