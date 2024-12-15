@@ -1,5 +1,4 @@
-import SpotifyAuthButton from "./SpotifyAuthButton";
-import * as SpotifyFunctions from './spotiFunctions.js'
+import SpotifyAuthButton from "./SpotifyAuthButton";import * as SpotifyFunctions from './spotiFunctions.js'
 import {useState,useEffect} from "react";
 const Test = ({taekscht,num}) => {
   const { VITE_CLIENT_ID } = import.meta.env;
