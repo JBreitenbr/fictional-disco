@@ -12,3 +12,4 @@ const TopTracks = () => {
     }).then(response => response.json()).then((data)=>setTracks(data.items))}, [])
   return (<ol>{tracks.map((track)=><li>{track.name}</li>)}</ol>)
 }
+export default TopTracks;
