@@ -1,10 +1,13 @@
+import {useState} from "react"
 import Test from "./Test";
 const Super = () => {
+  const [taekscht,setTaekscht] = useState("Login with Spotify");
+  const [zahl,setZahl]= usetState(1);
   return (
-    <div style={{display:"flex",flexDirection:"row"}}>
-      <Test taekscht="Last four weeks" num={1}/>
-      <Test taekscht="Last six months" num={2}/>
-      <Test taekscht="Last twelve months" num={3}/>
+    <div style={{display:"flex",flexDirection:"row"}}><button onClick={()=>setZahl(1)}>last four weeks</button>
+<button onClick={()=>setZahl(2)}>last six months</button>
+  <button onClick={()=>setZahl(3)}>last year</button>
+      <Test taekscht={taekscht} num={zahl}/>
     </div>
   );
 }
